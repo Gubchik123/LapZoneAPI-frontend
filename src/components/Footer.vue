@@ -6,9 +6,12 @@
 					<h5>Navigation</h5>
 					<ul class="nav flex-column">
 						<li class="nav-item mb-2">
-							<a href="/" class="nav-link text-color w-25 p-0">
+							<router-link
+								to="/"
+								class="nav-link text-color w-25 p-0"
+							>
 								Home
-							</a>
+							</router-link>
 						</li>
 						<li class="nav-item mb-2">
 							<a
@@ -41,14 +44,14 @@
 				<div class="col-md-5 offset-md-1 mb-3">
 					<h5>Subscribe to our mailing</h5>
 					<p>Monthly digest of what's new and exciting from us.</p>
-					
-                    <MailingForm />
+
+					<MailingForm />
 				</div>
 			</div>
 
 			<div class="d-flex justify-content-between pt-4 mt-4 border-top">
 				<p>&copy; {{ current_year }}</p>
-                <!-- Author's social networks -->
+				<!-- Author's social networks -->
 				<ul class="list-unstyled d-flex">
 					<li>
 						<a
@@ -78,12 +81,12 @@
 import MailingForm from "./forms/MailingForm.vue";
 
 export default {
-    name: "Footer",
-    components: { MailingForm },
-    computed: {
-        current_year() {
-            return new Date().getFullYear();
-        },
-    },
+	name: "Footer",
+	components: { MailingForm },
+	computed: {
+		current_year() {
+			return new Date().getFullYear();
+		},
+	},
 };
 </script>

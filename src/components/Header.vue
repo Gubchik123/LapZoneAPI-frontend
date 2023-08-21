@@ -4,7 +4,9 @@
 			<!-- Navigation -->
 			<ul class="navbar-nav list-group-horizontal">
 				<li class="nav-item me-3">
-					<a href="/" class="nav-link text-color"> Home </a>
+					<router-link to="/" class="nav-link text-color">
+						Home
+					</router-link>
 				</li>
 				<li class="nav-item me-3">
 					<a
