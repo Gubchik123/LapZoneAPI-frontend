@@ -21,3 +21,10 @@ export function get_brands(server_url) {
 		response.json()
 	);
 }
+
+export function get_product_by_(slug, server_url) {
+    return fetch(`${server_url}/shop/product/${slug}/`).then((response) => {
+        if (!response.ok) throw Error("Product not found");
+        return response.json();
+    });
+}
