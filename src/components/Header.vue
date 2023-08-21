@@ -1,0 +1,124 @@
+<template>
+	<header class="panel-bg-color">
+		<nav class="navbar content-center panel-bg-color py-0">
+			<!-- Navigation -->
+			<ul class="navbar-nav list-group-horizontal">
+				<li class="nav-item me-3">
+					<a href="/" class="nav-link text-color"> Home </a>
+				</li>
+				<li class="nav-item me-3">
+					<a
+						target="_blank"
+						href="https://itish.live"
+						class="nav-link text-color"
+					>
+						Blog
+					</a>
+				</li>
+				<li class="nav-item me-3">
+					<a href="#" class="nav-link text-color"> FAQs </a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link text-color"> About </a>
+				</li>
+			</ul>
+		</nav>
+
+		<nav class="navbar navbar-expand-md panel-bg-color">
+			<div class="container-fluid">
+				<!-- TODO: router-link to product list page -->
+				<a href="#" class="navbar-brand text-color">
+					<h4>LapZone</h4>
+				</a>
+
+				<!-- Burger button -->
+				<button
+					type="button"
+					aria-expanded="false"
+					class="navbar-toggler"
+					data-bs-toggle="collapse"
+					aria-label="Toggle navigation"
+					aria-controls="navbarSupportedContent"
+					data-bs-target="#navbarSupportedContent"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div
+					id="navbarSupportedContent"
+					class="collapse navbar-collapse"
+				>
+					<!-- Left navbar side -->
+					<ul
+						class="navbar-nav list-group-horizontal-md me-md-auto justify-content-center"
+					>
+						<li class="nav-item me-lg-2 me-sm-4">
+							<SearchForm />
+						</li>
+					</ul>
+					<!-- Right navbar side -->
+					<ul
+						class="navbar-nav list-group-horizontal justify-content-between align-items-center"
+					>
+						<!-- Theme toggler -->
+						<li class="nav-item me-5">
+							<ThemeToggler />
+						</li>
+						<li class="nav-item d-flex">
+							<!-- Link to user's cart detail page -->
+							<!-- TODO: router-link to cart detail page -->
+							<a
+								href="#"
+								class="d-block text-decoration-none me-3 position-relative"
+							>
+								<ion-icon
+									v-pre
+									name="cart"
+									class="pt-1"
+								></ion-icon>
+								<span
+									style="top: 5px"
+									class="position-absolute start-100 translate-middle badge rounded-pill bg-primary"
+								>
+									0
+									<!-- TODO: {{ cart_length }} -->
+								</span>
+							</a>
+							<!-- Link to customer profile page -->
+							<!-- TODO: router-link to customer profile page -->
+							<a href="#" class="d-block text-decoration-none">
+								<ion-icon
+									v-pre
+									class="pt-1"
+									name="person-circle"
+								></ion-icon>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+</template>
+
+<script>
+import ThemeToggler from "./ThemeToggler.vue";
+import SearchForm from "./forms/SearchForm.vue";
+
+export default {
+	name: "Header",
+	components: {
+		SearchForm,
+		ThemeToggler,
+	},
+};
+</script>
+
+<style scoped>
+@media screen and (max-width: 768px) {
+	/* Bootstrap5 .md breakpoint */
+	#navbarSupportedContent {
+		padding: 15px 0 15px 15px;
+	}
+}
+</style>
