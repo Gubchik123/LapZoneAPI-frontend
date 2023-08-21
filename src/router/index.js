@@ -4,7 +4,6 @@ import FAQsView from "@/views/FAQsView.vue";
 import AboutView from "@/views/AboutView.vue";
 import ErrorView from "@/views/ErrorView.vue";
 
-import HomeView from "@/views/shop/HomeView.vue";
 import shop_routes from "./shop_routes.js";
 
 const router = createRouter({
@@ -29,8 +28,6 @@ const router = createRouter({
         // Shop routes
         {
             path: "/",
-            name: "home",
-            component: HomeView,
             children: shop_routes
         },
         // All other routes
