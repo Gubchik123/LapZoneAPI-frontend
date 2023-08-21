@@ -40,3 +40,9 @@ export function get_products_by_category_(slug, server_url) {
         response.json()
     );
 }
+
+export function get_products_by_brand_(slug, server_url) {
+    return fetch(`${server_url}/shop/brand/${slug}/`).then((response) =>
+        response.json()
+    );
+}
