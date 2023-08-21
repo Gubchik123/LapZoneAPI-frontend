@@ -20,14 +20,14 @@
 							>
 								All products
 							</router-link>
-							<a
+							<router-link
 								:key="index"
 								v-for="(category, index) in categories"
-								href="{{ category.slug }}"
+								:to="{ name: 'category', params: { slug: category.slug } }"
 								class="btn btn-dark d-inline-block border-1 border-light me-2 fs-6 px-4 py-2"
 							>
 								{{ category.name }}
-							</a>
+							</router-link>
 						</div>
 						<div
 							v-else
