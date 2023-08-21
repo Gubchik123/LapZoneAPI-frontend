@@ -22,17 +22,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import BackendMixin from "@/mixins/BackendMixin.js";
 
 import { add_ } from "@/api/mailing.js";
 
 export default {
 	name: "MailingForm",
+    mixins: [BackendMixin],
 	data() {
 		return { email: "" };
-	},
-	computed: {
-		...mapGetters("backend", ["server_url"]),
 	},
 	methods: {
 		submit() {
