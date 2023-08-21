@@ -14,12 +14,12 @@
 							v-if="categories.length != 0"
 							class="white-space-nowrap overflow-auto"
 						>
-							<a
-								href="#"
+							<router-link
+								:to="{ name: 'products' }"
 								class="btn btn-dark d-inline-block border-1 border-light me-2 fs-6 px-4 py-2"
 							>
 								All products
-							</a>
+							</router-link>
 							<a
 								:key="index"
 								v-for="(category, index) in categories"

@@ -39,9 +39,12 @@
 		<nav class="navbar navbar-expand-md panel-bg-color">
 			<div class="container-fluid">
 				<!-- TODO: router-link to product list page -->
-				<a href="#" class="navbar-brand text-color">
+				<router-link
+					:to="{ name: 'products' }"
+					class="navbar-brand text-color"
+				>
 					<h4>LapZone</h4>
-				</a>
+				</router-link>
 
 				<!-- Burger button -->
 				<button
