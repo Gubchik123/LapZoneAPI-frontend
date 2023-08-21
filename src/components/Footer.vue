@@ -28,12 +28,12 @@
 							</a>
 						</li>
 						<li class="nav-item mb-2">
-							<a
-								href="#"
+							<router-link
+								:to="{ name: 'about' }"
 								class="nav-link text-color w-25 p-0"
 							>
 								About
-							</a>
+							</router-link>
 						</li>
 					</ul>
 				</div>

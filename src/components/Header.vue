@@ -19,7 +19,12 @@
 					<a href="#" class="nav-link text-color"> FAQs </a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link text-color"> About </a>
+					<router-link
+						:to="{ name: 'about' }"
+						class="nav-link text-color"
+					>
+						About
+					</router-link>
 				</li>
 			</ul>
 		</nav>
