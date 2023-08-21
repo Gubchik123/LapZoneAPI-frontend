@@ -2,6 +2,7 @@ import HomeView from "@/views/shop/HomeView.vue";
 import ProductDetailView from "../views/shop/ProductDetailView.vue";
 import ProductListView from "../views/shop/ProductListView.vue";
 import ProductListByCategoryView from "../views/shop/ProductListByCategoryView.vue";
+import ProductListByBrandView from "../views/shop/ProductListByBrandView.vue";
 
 export default [
     {
@@ -23,5 +24,10 @@ export default [
         path: "category/:slug",
         name: "category",
         component: ProductListByCategoryView,
+    },
+    {
+        path: "brand/:slug",
+        name: "brand",
+        component: ProductListByBrandView,
     }
 ]

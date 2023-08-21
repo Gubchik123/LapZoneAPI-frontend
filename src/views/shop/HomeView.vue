@@ -72,14 +72,14 @@
 							v-if="brands.length != 0"
 							class="white-space-nowrap overflow-auto"
 						>
-							<a
+							<router-link
 								:key="index"
 								v-for="(brand, index) in brands"
-								href="{{ brand.slug }}"
+								:to="{ name: 'brand', params: { slug: brand.slug } }"
 								class="btn btn-dark d-inline-block border-1 border-light me-2 fs-6 px-4 py-2"
 							>
 								{{ brand.name }}
-							</a>
+							</router-link>
 						</div>
 						<div
 							v-else
