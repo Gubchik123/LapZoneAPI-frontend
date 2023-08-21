@@ -34,3 +34,9 @@ export function get_all_products(server_url) {
         response.json()
     );
 }
+
+export function get_products_by_category_(slug, server_url) {
+    return fetch(`${server_url}/shop/category/${slug}/`).then((response) =>
+        response.json()
+    );
+}
