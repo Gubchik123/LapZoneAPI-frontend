@@ -28,3 +28,9 @@ export function get_product_by_(slug, server_url) {
         return response.json();
     });
 }
+
+export function get_all_products(server_url) {
+    return fetch(`${server_url}/shop/products/`).then((response) =>
+        response.json()
+    );
+}
