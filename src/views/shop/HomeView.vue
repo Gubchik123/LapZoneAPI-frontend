@@ -3,7 +3,10 @@
 		<template #advanced_content>
 			<div class="row px-3">
 				<div class="panel-bg-color col-12 p-0 rounded">
-					<Carousel />
+					<Carousel
+						:carousel_images="carousel_images"
+						main_image="https://github.com/Gubchik123/LapZoneAPI-frontend/raw/master/header.png"
+					/>
 
 					<div class="px-3 pb-5">
 						<h3 class="mt-5 mb-3">Categories</h3>
@@ -54,13 +57,13 @@
 							class="white-space-nowrap overflow-auto d-flex align-items-center"
 						>
 							<div
-                                :key="index"
-                                v-for="(product, index) in recently_added_products"
+								:key="index"
+								v-for="(
+									product, index
+								) in recently_added_products"
 								class="product d-inline-block d-flex flex-column justify-content-between rounded p-2 m-0 me-3"
 							>
-								<ProductCard
-									:product="product"
-								/>
+								<ProductCard :product="product" />
 							</div>
 						</div>
 
@@ -130,6 +133,7 @@ import BackendMixin from "@/mixins/BackendMixin.js";
 import ProductCard from "@/components/shop/ProductCard.vue";
 
 import {
+	get_carousel_images,
 	get_categories,
 	get_recently_added_products,
 	get_brands,
@@ -143,12 +147,16 @@ export default {
 	components: { BaseLayout, Carousel, ProductCard },
 	data() {
 		return {
+			carousel_images: [],
 			recently_added_products: [],
 			categories: [],
 			brands: [],
 		};
 	},
 	created() {
+		get_carousel_images(this.server_url).then((response) => {
+			this.carousel_images = response;
+		});
 		get_categories(this.server_url).then((response) => {
 			this.categories = response;
 		});
@@ -167,7 +175,7 @@ export default {
 	white-space: nowrap;
 }
 .product__title a {
-	white-space: normal!important;;
+	white-space: normal !important;
 }
 
 .product {

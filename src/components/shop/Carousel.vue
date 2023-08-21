@@ -5,21 +5,31 @@
 		class="carousel my-carousel slide bg-secondary"
 	>
 		<!-- Carousel body (images) -->
-		<div v-if="carousel_images.length != 0" class="carousel-inner">
+		<div class="carousel-inner">
 			<div
-				:key="index"
-				v-for="(image, index) in carousel_images"
-				class="carousel-item"
+				v-if="main_image != null"
 				data-bs-interval="5000"
+				class="carousel-item active"
 			>
-				<a v-if="image.product_slug == null" href="#" class="opacity-1">
-					<img class="w-100" :src="image.image" />
-				</a>
+				<img
+					:src="main_image"
+					class="d-block w-100"
+				/>
 			</div>
+
+			<template v-if="carousel_images.length != 0">
+                <div
+                    :key="index"
+                    v-for="(image, index) in carousel_images"
+                    class="carousel-item"
+                    data-bs-interval="3000"
+                >
+                    <a v-if="image.product_slug == null" href="#" class="opacity-1">
+                        <img class="w-100" :src="image.image" />
+                    </a>
+                </div>
+            </template>
 		</div>
-        <div v-else class="carousel-inner placeholder-glow">
-            <span class="placeholder col-12" style="height: 370px;"></span>
-        </div>
 		<!-- Button to next image -->
 		<button
 			type="button"
@@ -44,20 +54,11 @@
 </template>
 
 <script>
-import BackendMixin from "@/mixins/BackendMixin.js";
-
-import { get_carousel_images } from "@/api/shop.js";
-
 export default {
 	name: "Carousel",
-	mixins: [BackendMixin],
-	data() {
-		return { carousel_images: [] };
-	},
-	created() {
-		get_carousel_images(this.server_url).then((response) => {
-			this.carousel_images = response;
-		});
+	props: {
+		main_image: { type: String, default: null },
+		carousel_images: { type: Array, required: true },
 	},
 };
 </script>
