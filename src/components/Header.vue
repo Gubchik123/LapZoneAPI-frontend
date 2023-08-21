@@ -16,7 +16,12 @@
 					</a>
 				</li>
 				<li class="nav-item me-3">
-					<a href="#" class="nav-link text-color"> FAQs </a>
+					<router-link
+						:to="{ name: 'faqs' }"
+						class="nav-link text-color"
+					>
+						FAQs
+					</router-link>
 				</li>
 				<li class="nav-item">
 					<router-link

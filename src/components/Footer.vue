@@ -20,12 +20,12 @@
 							</a>
 						</li>
 						<li class="nav-item mb-2">
-							<a
-								href="#"
+							<router-link
+								:to="{ name: 'faqs' }"
 								class="nav-link text-color w-25 p-0"
 							>
 								FAQs
-							</a>
+							</router-link>
 						</li>
 						<li class="nav-item mb-2">
 							<router-link
