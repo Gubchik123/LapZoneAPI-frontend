@@ -134,9 +134,7 @@ import CategoriesBrandsMixin from "@/mixins/shop/CategoriesBrandsMixin.js";
 
 import {
 	get_carousel_images,
-	get_categories,
 	get_recently_added_products,
-	get_brands,
 } from "@/api/shop.js";
 
 import Carousel from "@/components/shop/Carousel.vue";
