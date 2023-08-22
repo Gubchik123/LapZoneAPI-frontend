@@ -1,21 +1,20 @@
+import { mapGetters } from "vuex";
+
 import BackendMixin from "@/mixins/BackendMixin.js";
-import { get_categories, get_brands } from "@/api/shop.js";
 
 export default {
     name: "CategoriesBrandsMixin",
     mixins: [BackendMixin],
 	data() {
 		return {
-			categories: [],
-			brands: [],
+			categories: [], brands: [],
 		};
 	},
 	created() {
-		get_categories(this.server_url).then((response) => {
-			this.categories = response;
-		});
-		get_brands(this.server_url).then((response) => {
-			this.brands = response;
-		});
+		this.get_categories().then((data) => this.categories = data);
+        this.get_brands().then((data) => this.brands = data);
 	},
+    methods: {
+        ...mapGetters("shop", ["get_categories", "get_brands"]),
+    }
 };
