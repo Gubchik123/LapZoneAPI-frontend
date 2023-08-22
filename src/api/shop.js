@@ -35,6 +35,12 @@ export function get_all_products(server_url) {
     );
 }
 
+export function get_products_that_contains_(query, server_url) {
+    return fetch(`${server_url}/shop/search/?q=${query}`).then((response) =>
+        response.json()
+    );
+}
+
 export function get_products_by_category_(slug, server_url) {
     return fetch(`${server_url}/shop/category/${slug}/`).then((response) =>
         response.json()
