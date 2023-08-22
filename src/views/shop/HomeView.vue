@@ -129,8 +129,8 @@
 
 <script>
 import BaseLayout from "@/layouts/BaseLayout.vue";
-import BackendMixin from "@/mixins/BackendMixin.js";
 import ProductCard from "@/components/shop/ProductCard.vue";
+import CategoriesBrandsMixin from "@/mixins/shop/CategoriesBrandsMixin.js";
 
 import {
 	get_carousel_images,
@@ -143,28 +143,20 @@ import Carousel from "@/components/shop/Carousel.vue";
 
 export default {
 	name: "HomeView",
-	mixins: [BackendMixin],
+	mixins: [CategoriesBrandsMixin],
 	components: { BaseLayout, Carousel, ProductCard },
 	data() {
 		return {
 			carousel_images: [],
 			recently_added_products: [],
-			categories: [],
-			brands: [],
 		};
 	},
 	created() {
 		get_carousel_images(this.server_url).then((response) => {
 			this.carousel_images = response;
 		});
-		get_categories(this.server_url).then((response) => {
-			this.categories = response;
-		});
 		get_recently_added_products(this.server_url).then((response) => {
 			this.recently_added_products = response;
-		});
-		get_brands(this.server_url).then((response) => {
-			this.brands = response;
 		});
 	},
 };
