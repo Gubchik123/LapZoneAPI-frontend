@@ -100,10 +100,10 @@
 							</ul>
 						</div>
 
-						<template v-if="products.length != 0">
+						<template v-if="products.results.length != 0">
 							<div
 								:key="product.id"
-								v-for="product in products"
+								v-for="product in products.results"
 								class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch"
 							>
 								<div
@@ -112,6 +112,14 @@
 									<ProductCard :product="product" />
 								</div>
 							</div>
+
+                            <pagination-nav
+                                v-if="products.count > 12"
+                                @change_page="change_page"
+                                :count="products.count"
+                                :next="products.next"
+                                :previous="products.previous"
+                            />
 						</template>
 						<div v-else>
 							<Alert
@@ -119,8 +127,6 @@
 								message="There are no products that match your search criteria."
 							/>
 						</div>
-
-						<!-- TODO: Pagination -->
 					</div>
 				</div>
 			</div>
@@ -132,10 +138,11 @@
 import BaseLayout from "@/layouts/BaseLayout.vue";
 import ProductCard from "@/components/shop/ProductCard.vue";
 import Alert from "@/components/Alert.vue";
+import PaginationNav from '@/components/PaginationNav.vue';
 
 export default {
 	name: "ProductListLayout",
-	components: { BaseLayout, ProductCard, Alert },
+	components: { BaseLayout, ProductCard, PaginationNav, Alert },
 	props: {
 		products: { type: Array, required: true },
 		title: { type: String, required: true },
@@ -183,6 +190,12 @@ export default {
 			);
 			this.$emit("order_by", order_by, order_dir);
 		},
+        change_page(params) {
+            document.body.scrollTop = 0; // For Safari
+	        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and
+            history.pushState(null, document.title, params);
+            this.$emit("change_page", params);
+        }
 	},
 };
 </script>

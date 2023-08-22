@@ -1,6 +1,7 @@
 <template>
     <ProductListLayout 
         @order_by="order_by"
+        @change_page="change_page"
         :products="products" 
         :title="capitalize($route.params.slug) + ' products'"
     />

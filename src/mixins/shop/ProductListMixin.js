@@ -10,12 +10,7 @@ export default {
 		return { products: [], url_suffix: "" };
 	},
     created() {
-        const url_params = Object.fromEntries(
-			new URLSearchParams(window.location.search)
-		);
-        if (url_params.orderby && url_params.orderdir)
-            this.order_by(url_params.orderby, url_params.orderdir)
-        else this.get_products(this.url);
+        this.get_products(this.url + window.location.search);
     },
 	computed: {
 		url() {
@@ -25,7 +20,7 @@ export default {
     methods: {
         get_products(url) {
             get_products(url).then((response) => {
-                this.products = response.results;
+                this.products = response;
             });
         },
         capitalize(title) {
@@ -35,6 +30,9 @@ export default {
             this.get_products(
                 this.url + `?orderby=${order_by}&orderdir=${order_dir}`
             );
+        },
+        change_page(params) {
+            this.get_products(this.url + params);
         }
     }
 };
