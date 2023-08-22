@@ -4,7 +4,7 @@
 			class="review__header p-2 mb-1 bg-primary bg-opacity-50 text-white d-flex justify-content-between"
 		>
 			<b>{{ review.name }}</b>
-			{{ review.created }}
+			{{ format_date_time(review.created) }}
 		</div>
 		<div
 			class="review__body d-flex justify-content-between align-items-center"
@@ -33,8 +33,11 @@
 </template>
 
 <script>
+import DateTimeMixin from "@/mixins/DateTimeMixin";
+
 export default {
 	name: "recursive-review",
+    mixins: [DateTimeMixin],
 	props: {
 		review: { type: Object, required: true },
 		children: { type: Array, default: () => [] },
