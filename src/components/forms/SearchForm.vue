@@ -1,12 +1,8 @@
 <template>
 	<div class="search_form d-flex justify-content-center">
-		<form
-			role="search"
-			action="/search"
-			class="search d-flex align-items-center"
-		>
+		<form @submit.prevent="search" class="search d-flex align-items-center">
 			<input
-				:value="$route.query.q || ''"
+				v-model.lazy.trim="search_query"
 				name="q"
 				type="search"
 				aria-label="Title..."
@@ -17,6 +13,26 @@
 		</form>
 	</div>
 </template>
+
+<script>
+export default {
+	name: "SearchForm",
+	data() {
+		return {
+			search_query: this.$route.query.q || "",
+		};
+	},
+	methods: {
+		search() {
+			if (this.search_query)
+				this.$router.push({
+					name: "search",
+					query: { q: this.search_query },
+				});
+		},
+	},
+};
+</script>
 
 <style scoped>
 @media screen and (max-width: 576px) {
