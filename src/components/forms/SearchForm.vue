@@ -2,7 +2,7 @@
 	<div class="search_form d-flex justify-content-center">
 		<form
 			role="search"
-			action="/products/"
+			action="/search"
 			class="search d-flex align-items-center"
 		>
 			<input
