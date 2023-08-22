@@ -1,5 +1,6 @@
 <template>
     <ProductListLayout 
+        @filter="filter"
         @order_by="order_by"
         @change_page="change_page"
         :products="products" 
@@ -35,6 +36,9 @@ export default {
         },
         capitalize(title) {
             return title.charAt(0).toUpperCase() + title.slice(1);
+        },
+        filter(params) {
+            this.get_products(this.url + params);
         },
         order_by(order_by, order_dir) {
             this.get_products(

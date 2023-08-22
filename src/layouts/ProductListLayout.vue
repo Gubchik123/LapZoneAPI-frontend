@@ -3,51 +3,11 @@
 		<template #advanced_content>
 			<div class="row px-3 d-flex justify-content-between">
 				<!-- Sidebar with form(s) for filtering -->
-				<div class="accordion col-lg-3 col-md-12 p-0">
-					<div class="accordion-item panel-bg-color text-color">
-						<h2
-							class="accordion-header"
-							id="panelsStayOpen-headingOne"
-						>
-							<button
-								type="button"
-								aria-expanded="true"
-								data-bs-toggle="collapse"
-								aria-controls="panelsStayOpen-collapseOne"
-								data-bs-target="#panelsStayOpen-collapseOne"
-								class="accordion-button panel-bg-color text-color"
-							>
-								Filtering
-							</button>
-						</h2>
-						<div
-							id="panelsStayOpen-collapseOne"
-							class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingOne"
-						>
-							<div class="accordion-body">
-								<form>
-									<!-- TODO: For loops -->
-
-									<div class="d-flex justify-content-between">
-										<button
-											type="submit"
-											class="btn btn-success btn-lg mt-3"
-										>
-											Filter
-										</button>
-										<a
-											href="#"
-											class="btn btn-danger btn-lg mt-3"
-										>
-											Clear
-										</a>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+				<filter-form 
+                    v-if="products.results"
+                    @filter="filter" 
+                    :years="[...new Set(products.results.map(product => product.year))]"
+                />
 				<!-- Block with product cards -->
 				<div class="col-lg-9 col-md-12 px-0">
 					<div
@@ -100,26 +60,28 @@ import BaseLayout from "@/layouts/BaseLayout.vue";
 import Alert from "@/components/Alert.vue";
 import PaginationNav from "@/components/PaginationNav.vue";
 
+import FilterForm from "@/components/forms/FilterForm.vue";
 import Ordering from "@/components/shop/Ordering.vue";
 import ProductCard from "@/components/shop/ProductCard.vue";
 
 export default {
 	name: "ProductListLayout",
-	components: { BaseLayout, Ordering, ProductCard, PaginationNav, Alert },
+	components: {
+		BaseLayout,
+		FilterForm,
+		Ordering,
+		ProductCard,
+		PaginationNav,
+		Alert
+	},
 	props: {
 		products: { type: Array, required: true },
 		title: { type: String, required: true },
 	},
-	mounted() {
-		// Script to check window size and hide filtering Bootstrap5 collapse
-		const collapseOne = new bootstrap.Collapse(
-			document.getElementById("panelsStayOpen-collapseOne"),
-			{ toggle: false }
-		);
-		if (window.innerWidth < 992) collapseOne.hide();
-		else collapseOne.show();
-	},
 	methods: {
+		filter(params) {
+			this.$emit("filter", params);
+		},
 		order_by(order_by, order_dir) {
 			this.$emit("order_by", order_by, order_dir);
 		},
