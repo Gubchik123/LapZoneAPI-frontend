@@ -63,7 +63,6 @@
 							>
 								Ordering
 							</button>
-							<!-- TODO: Ordering -->
 							<ul ref="ordering" class="dropdown-menu">
 								<li>
 									<a
@@ -81,7 +80,7 @@
 										@click.prevent="
 											order_by('price', 'asc', 1)
 										"
-										href="#"
+										href="?orderby=price&order=asc"
 										class="dropdown-item"
 									>
 										From cheap
@@ -92,7 +91,7 @@
 										@click.prevent="
 											order_by('price', 'desc', 2)
 										"
-										href="#"
+										href="?orderby=price&order=desc"
 										class="dropdown-item"
 									>
 										From expensive
@@ -142,22 +141,46 @@ export default {
 		title: { type: String, required: true },
 	},
 	mounted() {
-        // Script to check window size and hide filtering Bootstrap5 collapse
+		// Script to check window size and hide filtering Bootstrap5 collapse
 		const collapseOne = new bootstrap.Collapse(
 			document.getElementById("panelsStayOpen-collapseOne"),
 			{ toggle: false }
 		);
 		if (window.innerWidth < 992) collapseOne.hide();
 		else collapseOne.show();
-        // Script to add 'active' class to the first element of the ordering dropdown list
-        this.$refs.ordering.children[0].children[0].classList.add("active");
+		// Script to add 'active' class to the element of the ordering dropdown list
+		const url_params = Object.fromEntries(
+			new URLSearchParams(window.location.search)
+		);
+		const order_by = url_params.orderby;
+		const order_dir = url_params.orderdir;
+
+		if (order_by && order_dir) {
+			for (const li of this.$refs.ordering.children) {
+				if (
+					li.children[0].href.includes(order_by) &&
+					li.children[0].href.includes(order_dir)
+				) {
+					li.children[0].classList.add("active");
+					break;
+				}
+			}
+		} else
+			this.$refs.ordering.children[0].children[0].classList.add("active");
 	},
 	methods: {
 		order_by(order_by, order_dir, child_index) {
-            for (const li of this.$refs.ordering.children) {
-                li.children[0].classList.remove("active");
-            }
-			this.$refs.ordering.children[child_index].children[0].classList.add("active");
+			for (const li of this.$refs.ordering.children) {
+				li.children[0].classList.remove("active");
+			}
+			history.pushState(
+				null,
+				document.title,
+				`?orderby=${order_by}&orderdir=${order_dir}`
+			);
+			this.$refs.ordering.children[child_index].children[0].classList.add(
+				"active"
+			);
 			this.$emit("order_by", order_by, order_dir);
 		},
 	},

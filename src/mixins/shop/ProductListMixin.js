@@ -10,7 +10,12 @@ export default {
 		return { products: [], url_suffix: "" };
 	},
     created() {
-        this.get_products(this.url);
+        const url_params = Object.fromEntries(
+			new URLSearchParams(window.location.search)
+		);
+        if (url_params.orderby && url_params.orderdir)
+            this.order_by(url_params.orderby, url_params.orderdir)
+        else this.get_products(this.url);
     },
 	computed: {
 		url() {
