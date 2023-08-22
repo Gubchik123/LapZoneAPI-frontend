@@ -42,7 +42,9 @@
 					<!-- Short description -->
 					<div>
 						<h5>Short description</h5>
-						<p v-html="product.description.slice(0, 100) + '...'"></p>
+						<p
+							v-html="product.description.slice(0, 100) + '...'"
+						></p>
 						<a
 							href="#description"
 							class="btn btn-outline-info d-block text-center"
@@ -165,7 +167,10 @@
 			<h3 id="reviews" class="my-3">Reviews</h3>
 
 			<!-- Row with review form and product reviews -->
-			<ProductReviews :reviews="product.reviews" />
+			<ProductReviews
+				:product_id="product.id"
+				:reviews="product.reviews"
+			/>
 		</template>
 	</BaseLayout>
 </template>

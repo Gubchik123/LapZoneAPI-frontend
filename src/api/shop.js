@@ -1,3 +1,5 @@
+import { get_json_headers } from "./api";
+
 export function get_carousel_images(server_url) {
 	return fetch(`${server_url}/shop/carousel-images/`).then((response) =>
 		response.json()
@@ -31,4 +33,17 @@ export function get_product_by_(slug, server_url) {
 
 export function get_products(url) {
 	return fetch(url).then((response) => response.json());
+}
+
+export function create_review(new_review, server_url) {
+    return fetch(`${server_url}/shop/review/`, {
+        method: "POST",
+        headers: get_json_headers(),
+        body: JSON.stringify({
+            "name": new_review.name,
+            "body": new_review.body,
+            "parent": new_review.parent_id,
+            "product": new_review.product_id,
+        }),
+    }).then((response) => response.json())
 }

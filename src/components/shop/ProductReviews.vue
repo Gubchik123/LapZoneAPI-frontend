@@ -1,12 +1,13 @@
 <template>
 	<div class="row px-3">
 		<div class="panel-bg-color col-12 py-3 rounded">
-			<form class="mb-3" id="review_form">
+			<form @submit.prevent="add_review" class="mb-3" id="review_form">
 				<!-- Username field -->
 				<div>
 					<label for="id_name">Username:</label>
 
 					<input
+                        v-model.lazy.trim="new_review.name"
 						type="text"
 						name="name"
 						class="form-control w-50 mb-2"
@@ -20,6 +21,7 @@
 					<label for="id_body">Body:</label>
 
 					<textarea
+                        v-model.lazy.trim="new_review.body"
 						name="body"
 						cols="40"
 						rows="10"
@@ -30,13 +32,14 @@
 				</div>
 				<!-- Hidden review parent id field -->
 				<input
+                    v-model="new_review.parent_id"
 					type="hidden"
 					id="review_parent"
 					name="review_parent_id"
 				/>
 				<input
 					type="submit"
-					value="Add review"
+					:value="action"
 					class="btn btn-success btn-lg mb-3"
 				/>
 			</form>
@@ -59,9 +62,9 @@
 						>
 							<p class="mb-0"><b>Review:</b> {{ review.body }}</p>
 							<a
+                                @click="add_answer_for_(review.name, review.id)"
 								href="#review_form"
 								class="btn btn-outline-info btn-sm"
-								onclick="add_answer_for_('{{ review.name }}', '{{ review.id }}')"
 							>
 								Answer
 							</a>
@@ -79,17 +82,51 @@
 </template>
 
 <script>
+import BackendMixin from "@/mixins/BackendMixin.js";
 import Alert from "@/components/Alert.vue";
+
+import { create_review } from "@/api/shop.js";
 
 export default {
 	name: "ProductReviews",
+    mixins: [BackendMixin],
 	components: { Alert },
+    data() {
+        return {
+            new_review: {
+                name: "",
+                body: "",
+                parent_id: null,
+            },
+            action: "Add review",
+        };
+    },
 	props: {
-		reviews: {
-			type: Array,
-			required: true,
-		},
+		reviews: { type: Array, required: true },
+        product_id: { type: Number, required: true },
 	},
+    methods: {
+        add_review() {
+            if (!this.new_review.name || !this.new_review.body) return;
+            this.new_review.product_id = this.product_id;
+            create_review(this.new_review, this.server_url)
+                .then((response) => {
+                    if (!this.new_review.parent_id)
+                        this.reviews.unshift(response);
+                    this.new_review = {
+                        name: "",
+                        body: "",
+                        parent_id: null,
+                    };
+                    this.action = "Add review";
+                });
+        },
+        add_answer_for_(name, id) {
+            this.new_review.parent_id = id;
+            this.new_review.name = `${name}, `;
+            this.action = "Add answer";
+        },
+    }
 };
 </script>
 
