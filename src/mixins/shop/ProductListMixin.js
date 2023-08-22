@@ -9,6 +9,11 @@ export default {
 	data() {
 		return { products: [] };
 	},
+    created() {
+        get_products(this.url).then((response) => {
+            this.products = response.results;
+        });
+    },
 	computed: {
 		url() {
             return `${this.server_url}/shop${this.url_suffix}`;
@@ -17,9 +22,9 @@ export default {
             throw new Error("Must be implemented by child component");
         }
 	},
-	created() {
-		get_products(this.url).then((response) => {
-			this.products = response.results;
-		});
-	},
+    methods: {
+        capitalize(title) {
+            return title.charAt(0).toUpperCase() + title.slice(1);
+        }
+    }
 };

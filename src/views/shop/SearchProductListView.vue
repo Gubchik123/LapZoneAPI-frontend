@@ -1,5 +1,8 @@
 <template>
-    <ProductListLayout :products="products" />
+    <ProductListLayout 
+        :products="products" 
+        :title="'Search results for: `' + $route.query.q + '`'"
+    />
 </template>
 
 <script>

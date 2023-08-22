@@ -1,5 +1,8 @@
 <template>
-    <ProductListLayout :products="products" />
+    <ProductListLayout 
+        :products="products" 
+        title="All products"
+    />
 </template>
 
 <script>

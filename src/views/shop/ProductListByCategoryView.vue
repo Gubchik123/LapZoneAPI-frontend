@@ -1,5 +1,8 @@
 <template>
-    <ProductListLayout :products="products" />
+    <ProductListLayout 
+        :products="products" 
+        :title="capitalize($route.params.slug)"
+    />
 </template>
 
 <script>
