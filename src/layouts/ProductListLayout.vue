@@ -64,19 +64,37 @@
 								Ordering
 							</button>
 							<!-- TODO: Ordering -->
-							<ul class="dropdown-menu">
+							<ul ref="ordering" class="dropdown-menu">
 								<li>
-									<a href="#" class="dropdown-item">
+									<a
+										@click.prevent="
+											order_by('name', 'asc', 0)
+										"
+										href="?orderby=name&order=asc"
+										class="dropdown-item"
+									>
 										By name
 									</a>
 								</li>
 								<li>
-									<a href="#" class="dropdown-item">
+									<a
+										@click.prevent="
+											order_by('price', 'asc', 1)
+										"
+										href="#"
+										class="dropdown-item"
+									>
 										From cheap
 									</a>
 								</li>
 								<li>
-									<a href="#" class="dropdown-item">
+									<a
+										@click.prevent="
+											order_by('price', 'desc', 2)
+										"
+										href="#"
+										class="dropdown-item"
+									>
 										From expensive
 									</a>
 								</li>
@@ -120,8 +138,28 @@ export default {
 	name: "ProductListLayout",
 	components: { BaseLayout, ProductCard, Alert },
 	props: {
-        products: { type: Array, required: true },
-        title: { type: String, required: true }
+		products: { type: Array, required: true },
+		title: { type: String, required: true },
+	},
+	mounted() {
+        // Script to check window size and hide filtering Bootstrap5 collapse
+		const collapseOne = new bootstrap.Collapse(
+			document.getElementById("panelsStayOpen-collapseOne"),
+			{ toggle: false }
+		);
+		if (window.innerWidth < 992) collapseOne.hide();
+		else collapseOne.show();
+        // Script to add 'active' class to the first element of the ordering dropdown list
+        this.$refs.ordering.children[0].children[0].classList.add("active");
+	},
+	methods: {
+		order_by(order_by, order_dir, child_index) {
+            for (const li of this.$refs.ordering.children) {
+                li.children[0].classList.remove("active");
+            }
+			this.$refs.ordering.children[child_index].children[0].classList.add("active");
+			this.$emit("order_by", order_by, order_dir);
+		},
 	},
 };
 </script>

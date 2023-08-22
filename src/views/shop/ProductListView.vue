@@ -1,5 +1,6 @@
 <template>
     <ProductListLayout 
+        @order_by="order_by"
         :products="products" 
         title="All products"
     />
@@ -11,10 +12,8 @@ import ProductListMixin from "@/mixins/shop/ProductListMixin";
 export default {
 	name: "ProductListView",
 	mixins: [ProductListMixin],
-    computed: {
-        url_suffix() {
-            return `/products/`
-        }
+    data() {
+        return { url_suffix: `/products/` }
     }
 };
 </script>

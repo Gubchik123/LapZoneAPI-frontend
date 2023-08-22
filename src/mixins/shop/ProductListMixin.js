@@ -7,24 +7,29 @@ export default {
 	mixins: [BackendMixin],
 	components: { ProductListLayout },
 	data() {
-		return { products: [] };
+		return { products: [], url_suffix: "" };
 	},
     created() {
-        get_products(this.url).then((response) => {
-            this.products = response.results;
-        });
+        this.get_products(this.url);
     },
 	computed: {
 		url() {
             return `${this.server_url}/shop${this.url_suffix}`;
-        },
-        url_suffix() {
-            throw new Error("Must be implemented by child component");
         }
 	},
     methods: {
+        get_products(url) {
+            get_products(url).then((response) => {
+                this.products = response.results;
+            });
+        },
         capitalize(title) {
             return title.charAt(0).toUpperCase() + title.slice(1);
+        },
+        order_by(order_by, order_dir) {
+            this.get_products(
+                this.url + `?orderby=${order_by}&orderdir=${order_dir}`
+            );
         }
     }
 };

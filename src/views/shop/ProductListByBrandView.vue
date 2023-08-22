@@ -1,5 +1,6 @@
 <template>
     <ProductListLayout 
+        @order_by="order_by"
         :products="products" 
         :title="capitalize($route.params.slug) + ' products'"
     />
@@ -11,10 +12,8 @@ import ProductListMixin from "@/mixins/shop/ProductListMixin";
 export default {
 	name: "ProductListByBrandView",
 	mixins: [ProductListMixin],
-    computed: {
-        url_suffix() {
-            return `/brand/${this.$route.params.slug}/`
-        }
-    }
+    data() {
+        return { url_suffix: `/brand/${this.$route.params.slug}/` }
+    },
 };
 </script>
