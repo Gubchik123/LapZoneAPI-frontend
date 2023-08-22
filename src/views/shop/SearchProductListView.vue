@@ -1,26 +1,17 @@
 <template>
-	<ProductListLayout :products="products" />
+    <ProductListLayout :products="products" />
 </template>
 
 <script>
-import ProductListLayout from "@/layouts/ProductListLayout.vue";
-import BackendMixin from "@/mixins/BackendMixin.js";
-
-import { get_products_that_contains_ } from "@/api/shop.js";
+import ProductListMixin from "@/mixins/shop/ProductListMixin";
 
 export default {
 	name: "SearchProductListView",
-	mixins: [BackendMixin],
-	components: { ProductListLayout },
-	data() {
-		return { products: [] };
-	},
-	created() {
-		get_products_that_contains_(this.$route.query.q, this.server_url).then(
-			(response) => {
-				this.products = response.results;
-			}
-		);
-	},
+	mixins: [ProductListMixin],
+    computed: {
+        url_suffix() {
+            return `/search/?q=${this.$route.query.q}`
+        }
+    }
 };
 </script>

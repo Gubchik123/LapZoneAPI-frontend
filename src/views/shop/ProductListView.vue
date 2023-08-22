@@ -1,24 +1,17 @@
 <template>
-	<ProductListLayout :products="products" />
+    <ProductListLayout :products="products" />
 </template>
 
 <script>
-import ProductListLayout from "@/layouts/ProductListLayout.vue";
-import BackendMixin from "@/mixins/BackendMixin.js";
-
-import { get_all_products } from "@/api/shop.js";
+import ProductListMixin from "@/mixins/shop/ProductListMixin";
 
 export default {
 	name: "ProductListView",
-	mixins: [BackendMixin],
-	components: { ProductListLayout },
-	data() {
-		return { products: [] };
-	},
-	created() {
-		get_all_products(this.server_url).then((response) => {
-			this.products = response.results;
-		});
-	},
+	mixins: [ProductListMixin],
+    computed: {
+        url_suffix() {
+            return `/products/`
+        }
+    }
 };
 </script>
