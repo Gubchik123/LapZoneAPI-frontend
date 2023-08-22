@@ -23,32 +23,12 @@ export function get_brands(server_url) {
 }
 
 export function get_product_by_(slug, server_url) {
-    return fetch(`${server_url}/shop/product/${slug}/`).then((response) => {
-        if (!response.ok) throw Error("Product not found");
-        return response.json();
-    });
+	return fetch(`${server_url}/shop/product/${slug}/`).then((response) => {
+		if (!response.ok) throw Error("Product not found");
+		return response.json();
+	});
 }
 
-export function get_all_products(server_url) {
-    return fetch(`${server_url}/shop/products/`).then((response) =>
-        response.json()
-    );
-}
-
-export function get_products_that_contains_(query, server_url) {
-    return fetch(`${server_url}/shop/search/?q=${query}`).then((response) =>
-        response.json()
-    );
-}
-
-export function get_products_by_category_(slug, server_url) {
-    return fetch(`${server_url}/shop/category/${slug}/`).then((response) =>
-        response.json()
-    );
-}
-
-export function get_products_by_brand_(slug, server_url) {
-    return fetch(`${server_url}/shop/brand/${slug}/`).then((response) =>
-        response.json()
-    );
+export function get_products(url) {
+	return fetch(url).then((response) => response.json());
 }
