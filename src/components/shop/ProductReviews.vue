@@ -7,7 +7,7 @@
 					<label for="id_name">Username:</label>
 
 					<input
-                        v-model.lazy.trim="new_review.name"
+						v-model.lazy.trim="new_review.name"
 						type="text"
 						name="name"
 						class="form-control w-50 mb-2"
@@ -21,7 +21,7 @@
 					<label for="id_body">Body:</label>
 
 					<textarea
-                        v-model.lazy.trim="new_review.body"
+						v-model.lazy.trim="new_review.body"
 						name="body"
 						cols="40"
 						rows="10"
@@ -32,7 +32,7 @@
 				</div>
 				<!-- Hidden review parent id field -->
 				<input
-                    v-model="new_review.parent_id"
+					v-model="new_review.parent_id"
 					type="hidden"
 					id="review_parent"
 					name="review_parent_id"
@@ -46,30 +46,13 @@
 
 			<div class="reviews">
 				<template v-if="reviews.length != 0">
-					<div
-						:key="index"
+					<Review
+						@answer="add_answer_for_"
 						v-for="(review, index) in reviews"
-						class="review mt-4"
-					>
-						<div
-							class="review__header p-2 mb-1 bg-primary bg-opacity-50 text-white d-flex justify-content-between"
-						>
-							<b>{{ review.name }}</b>
-							{{ review.created }}
-						</div>
-						<div
-							class="review__body d-flex justify-content-between align-items-center"
-						>
-							<p class="mb-0"><b>Review:</b> {{ review.body }}</p>
-							<a
-                                @click="add_answer_for_(review.name, review.id)"
-								href="#review_form"
-								class="btn btn-outline-info btn-sm"
-							>
-								Answer
-							</a>
-						</div>
-					</div>
+						:key="index"
+						:review="review"
+						:children="review.children"
+					/>
 				</template>
 				<Alert
 					v-else
@@ -84,49 +67,71 @@
 <script>
 import BackendMixin from "@/mixins/BackendMixin.js";
 import Alert from "@/components/Alert.vue";
+import Review from "@/components/shop/Review.vue";
 
 import { create_review } from "@/api/shop.js";
 
 export default {
 	name: "ProductReviews",
-    mixins: [BackendMixin],
-	components: { Alert },
-    data() {
-        return {
-            new_review: {
+	mixins: [BackendMixin],
+	components: { Review, Alert },
+	data() {
+		return {
+			new_review: {
+				name: "",
+				body: "",
+				parent_id: null,
+			},
+			action: "Add review",
+		};
+	},
+	props: {
+		reviews: { type: Array, required: true },
+		product_id: { type: Number, required: true },
+	},
+	methods: {
+		add_review() {
+			if (!this.new_review.name || !this.new_review.body) return;
+			this.new_review.product_id = this.product_id;
+			create_review(this.new_review, this.server_url).then((response) => {
+				if (!this.new_review.parent_id) this.reviews.unshift(response);
+				else {
+					const found_review = this._find_review_by_parent_id(
+						this.reviews,
+						this.new_review.parent_id
+					);
+                    console.log(found_review);
+					found_review.children.unshift(response);
+				}
+				this._reset_data();
+			});
+		},
+		add_answer_for_(name, id) {
+			this.new_review.parent_id = id;
+			this.new_review.body = `${name}, `;
+			this.action = "Add answer";
+		},
+		_find_review_by_parent_id(reviews, parent_id) {
+			for (let review of reviews) {
+				if (review.id == parent_id) return review;
+				if (review.children.length) {
+					const found_review = this._find_review_by_parent_id(
+						review.children,
+						parent_id
+					);
+					if (found_review) return found_review;
+				}
+			}
+		},
+        _reset_data() {
+            this.new_review = {
                 name: "",
                 body: "",
                 parent_id: null,
-            },
-            action: "Add review",
-        };
-    },
-	props: {
-		reviews: { type: Array, required: true },
-        product_id: { type: Number, required: true },
+            };
+            this.action = "Add review";
+        }
 	},
-    methods: {
-        add_review() {
-            if (!this.new_review.name || !this.new_review.body) return;
-            this.new_review.product_id = this.product_id;
-            create_review(this.new_review, this.server_url)
-                .then((response) => {
-                    if (!this.new_review.parent_id)
-                        this.reviews.unshift(response);
-                    this.new_review = {
-                        name: "",
-                        body: "",
-                        parent_id: null,
-                    };
-                    this.action = "Add review";
-                });
-        },
-        add_answer_for_(name, id) {
-            this.new_review.parent_id = id;
-            this.new_review.name = `${name}, `;
-            this.action = "Add answer";
-        },
-    }
 };
 </script>
 
