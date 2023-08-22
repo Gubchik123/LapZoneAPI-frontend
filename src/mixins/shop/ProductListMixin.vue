@@ -1,3 +1,13 @@
+<template>
+    <ProductListLayout 
+        @order_by="order_by"
+        @change_page="change_page"
+        :products="products" 
+        :title="title"
+    />
+</template>
+
+<script>
 import ProductListLayout from "@/layouts/ProductListLayout.vue";
 import BackendMixin from "@/mixins/BackendMixin.js";
 
@@ -7,7 +17,7 @@ export default {
 	mixins: [BackendMixin],
 	components: { ProductListLayout },
 	data() {
-		return { products: [], url_suffix: "" };
+		return { products: [], url_suffix: "", title: "All products" };
 	},
     created() {
         this.get_products(this.url + window.location.search);
@@ -36,3 +46,4 @@ export default {
         }
     }
 };
+</script>
