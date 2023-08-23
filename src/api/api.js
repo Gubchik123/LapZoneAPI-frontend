@@ -4,3 +4,9 @@ export function get_json_headers() {
         "Content-Type": "application/json",
     }
 }
+
+export function get_auth_headers() {
+	return {
+		Authorization: `Token ${localStorage.getItem("token")}`,
+	};
+}
