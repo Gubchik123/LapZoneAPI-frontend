@@ -4,6 +4,7 @@ import FAQsView from "@/views/FAQsView.vue";
 import AboutView from "@/views/AboutView.vue";
 import ErrorView from "@/views/ErrorView.vue";
 
+import CartDetailView from "@/views/cart/CartDetailView.vue";
 import EmailDeleteView from "@/views/mailing/EmailDeleteView.vue";
 
 import shop_routes from "./shop_routes.js";
@@ -31,6 +32,12 @@ const router = createRouter({
         {
             path: "/",
             children: shop_routes
+        },
+        // Cart route
+        {
+            path: "/cart",
+            name: "cart",
+            component: CartDetailView,
         },
         // Mailing route
         {

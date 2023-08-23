@@ -81,9 +81,8 @@
 						</li>
 						<li class="nav-item d-flex">
 							<!-- Link to user's cart detail page -->
-							<!-- TODO: router-link to cart detail page -->
-							<a
-								href="#"
+							<router-link
+								:to="{ name: 'cart' }"
 								class="d-block text-decoration-none me-3 position-relative"
 							>
 								<ion-icon
@@ -95,10 +94,9 @@
 									style="top: 5px"
 									class="position-absolute start-100 translate-middle badge rounded-pill bg-primary"
 								>
-									0
-									<!-- TODO: {{ cart_length }} -->
+									{{ cart_quantity }}
 								</span>
-							</a>
+							</router-link>
 							<!-- Link to customer profile page -->
 							<!-- TODO: router-link to customer profile page -->
 							<a href="#" class="d-block text-decoration-none">
@@ -117,15 +115,25 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 import ThemeToggler from "./ThemeToggler.vue";
 import SearchForm from "./forms/SearchForm.vue";
 
 export default {
 	name: "Header",
 	components: {
-		SearchForm,
-		ThemeToggler,
+		SearchForm, ThemeToggler,
 	},
+    created() {
+        this.get_cart_products();
+    },
+    computed: {
+        ...mapGetters("cart", ["cart_quantity"]),
+    },
+    methods: {
+        ...mapActions("cart", ["get_cart_products"]),
+    }
 };
 </script>
 
