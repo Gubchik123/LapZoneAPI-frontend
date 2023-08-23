@@ -31,22 +31,17 @@
 	</div>
 	<!-- "Like" and "Add to cart" product buttons -->
 	<div class="product__buttons d-flex justify-content-between">
-		<!-- TODO: 
-            Add "Like" button if user is authenticated
-            Add checking if product is in cart
-        -->
-		<button
-			class="cart btn btn-success ms-2"
-			data-product_id="{{ product.id }}"
-		>
-			<ion-icon name="cart-outline"></ion-icon>
-		</button>
+		<!-- TODO: Add "Like" button if user is authenticated -->
+		<cart-button :product_id="product.id" />
 	</div>
 </template>
 
 <script>
+import CartButton from "../buttons/CartButton.vue";
+
 export default {
 	name: "ProductCard",
+    components: { CartButton },
 	props: {
 		product: {
 			type: Object,
