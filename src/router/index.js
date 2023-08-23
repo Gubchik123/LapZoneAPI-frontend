@@ -8,6 +8,7 @@ import CartDetailView from "@/views/cart/CartDetailView.vue";
 import EmailDeleteView from "@/views/mailing/EmailDeleteView.vue";
 
 import shop_routes from "./shop_routes.js";
+import auth_routes from "./auth_routes.js";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,13 @@ const router = createRouter({
         {
             path: "/",
             children: shop_routes
+        },
+        // Auth routes
+        {
+            path: "/auth",
+            name: "auth",
+            redirect: "/auth/signin",
+            children: auth_routes
         },
         // Cart route
         {
