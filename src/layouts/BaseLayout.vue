@@ -1,6 +1,4 @@
 <template>
-	<Header />
-
 	<main>
 		<div class="container-fluid">
 			<div class="row">
@@ -25,11 +23,8 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-
 export default {
 	name: "BaseLayout",
-	components: { Header },
 	props: {
 		title: { type: String, required: true },
 		content_title: { type: String, required: true },
