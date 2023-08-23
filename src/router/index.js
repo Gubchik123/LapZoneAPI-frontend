@@ -4,6 +4,8 @@ import FAQsView from "@/views/FAQsView.vue";
 import AboutView from "@/views/AboutView.vue";
 import ErrorView from "@/views/ErrorView.vue";
 
+import EmailDeleteView from "@/views/mailing/EmailDeleteView.vue";
+
 import shop_routes from "./shop_routes.js";
 
 const router = createRouter({
@@ -29,6 +31,12 @@ const router = createRouter({
         {
             path: "/",
             children: shop_routes
+        },
+        // Mailing route
+        {
+            path: "/mailing/:uuid(\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12})/delete",
+            name: "mailing_delete",
+            component: EmailDeleteView,
         },
         // All other routes
 		{
