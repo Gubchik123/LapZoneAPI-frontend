@@ -4,6 +4,7 @@ import Vuex from "vuex";
 import backend from "./backend";
 import error from "./error";
 import shop from "./shop";
+import cart from "./cart";
 
 // Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
         backend: backend,
 		error: error,
         shop: shop,
+        cart: cart,
 	},
 });
 
