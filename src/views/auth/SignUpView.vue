@@ -100,9 +100,7 @@ export default {
 	},
 	methods: {
 		submit() {
-            console.log("submit1");
 			if (!this._is_valid_data()) return;
-            console.log("submit2");
 
 			signup(this.user, this.server_url)
 				.then(() => {

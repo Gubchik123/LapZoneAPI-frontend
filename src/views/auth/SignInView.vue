@@ -105,7 +105,7 @@ export default {
                     
                     if (this.$route.redirectedFrom)
                         this.$router.push(this.$route.redirectedFrom.fullPath);
-                    else this.$router.push({ name: "home" }); // TODO: Change to profile route name
+                    else this.$router.push({ name: "profile" });
                 })
                 .catch(error => {
                     this.message = {

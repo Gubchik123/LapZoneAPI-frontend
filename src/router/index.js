@@ -9,6 +9,7 @@ import EmailDeleteView from "@/views/mailing/EmailDeleteView.vue";
 
 import shop_routes from "./shop_routes.js";
 import auth_routes from "./auth_routes.js";
+import profile_routes from "./profile_routes.js";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +42,11 @@ const router = createRouter({
             redirect: "/auth/signin",
             children: auth_routes
         },
+        // Profile routes
+        {
+            path: "/profile",
+            children: profile_routes,
+        },
         // Cart route
         {
             path: "/cart",
@@ -63,8 +69,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 	if (to.matched.some((record) => record.meta.requires_auth)) {
-		if (localStorage.getItem("access_token")) next();
-		else next({ name: "login" });
+		if (localStorage.getItem("token")) next();
+		else next({ name: "signin" });
 	} else next();
 });
 

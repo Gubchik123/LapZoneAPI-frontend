@@ -98,14 +98,16 @@
 								</span>
 							</router-link>
 							<!-- Link to customer profile page -->
-							<!-- TODO: router-link to customer profile page -->
-							<a href="#" class="d-block text-decoration-none">
+							<router-link
+								:to="{ name: 'profile' }"
+								class="d-block text-decoration-none"
+							>
 								<ion-icon
 									v-pre
 									class="pt-1"
 									name="person-circle"
 								></ion-icon>
-							</a>
+							</router-link>
 						</li>
 					</ul>
 				</div>
@@ -123,17 +125,20 @@ import SearchForm from "./forms/SearchForm.vue";
 export default {
 	name: "Header",
 	components: {
-		SearchForm, ThemeToggler,
+		SearchForm,
+		ThemeToggler,
 	},
-    created() {
-        this.get_cart_products();
-    },
-    computed: {
-        ...mapGetters("cart", ["cart_quantity"]),
-    },
-    methods: {
-        ...mapActions("cart", ["get_cart_products"]),
-    }
+	created() {
+		this.get_cart_products();
+		if (localStorage.getItem("token")) this.get_user();
+	},
+	computed: {
+		...mapGetters("cart", ["cart_quantity"]),
+	},
+	methods: {
+		...mapActions("cart", ["get_cart_products"]),
+		...mapActions("user", ["get_user"]),
+	},
 };
 </script>
 
