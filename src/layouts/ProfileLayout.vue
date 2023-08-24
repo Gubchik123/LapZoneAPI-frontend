@@ -6,7 +6,7 @@
 			</button>
 		</template>
 		<template #advanced_content>
-			<div class="row px-3 d-flex justify-content-between">
+			<div class="row px-3 mb-5 d-flex justify-content-between">
 				<!-- Block with links to other pages -->
 				<div class="col-lg-3 col-md-12 p-0">
 					<div class="list-group">
@@ -19,9 +19,8 @@
 						>
 							Personal details
 						</router-link>
-						<!-- TODO: router-link with :to="{ name: 'update-username' }" -->
-						<a
-							href="#"
+						<router-link
+							:to="{ name: 'update-username' }"
 							:class="{
 								'active disabled':
 									$route.name == 'update-username',
@@ -29,7 +28,7 @@
 							class="list-group-item list-group-item-action"
 						>
 							Change username
-						</a>
+						</router-link>
 						<!-- TODO: router-link with :to="{ name: 'update-password' }" -->
 						<a
 							href="#"
