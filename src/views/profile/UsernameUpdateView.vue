@@ -35,7 +35,7 @@ import ProfileLayout from "@/layouts/ProfileLayout.vue";
 import ConfirmPasswordModal from "@/components/profile/ConfirmPasswordModal.vue";
 
 export default {
-	name: "UserDetailView",
+	name: "UpdateUsenameView",
 	components: { ProfileLayout, ConfirmPasswordModal },
 	data() {
 		return { confirmation: false, error_message: "" };
@@ -49,7 +49,6 @@ export default {
             const username = this.user.username;
 			this.update_user_username({username, current_password})
 				.then((data) => {
-                    debugger;
 					if (data && data.new_username)
 						throw new Error(
 							"A user with this username already exists."
