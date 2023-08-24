@@ -9,25 +9,11 @@
 		<ul class="list-unstyled">
 			<!-- Google sign in link -->
 			<li class="mb-3">
-				<a
-					href="#"
-					title="Google"
-					class="btn btn-dark w-50 d-flex align-items-center google"
-				>
-					<ion-icon v-pre name="logo-google"></ion-icon>
-					<span class="me-auto ms-auto">Google</span>
-				</a>
+				<GoogleButton />
 			</li>
 			<!-- GitHub sign in link -->
 			<li class="mb-3">
-				<a
-					href="#"
-					title="GitHub"
-					class="btn btn-dark w-50 d-flex align-items-center github"
-				>
-					<ion-icon v-pre name="logo-github"></ion-icon>
-					<span class="me-auto ms-auto">GitHub</span>
-				</a>
+                <GitHubButton />
 			</li>
 		</ul>
 
@@ -98,11 +84,13 @@ import BaseLayout from "@/layouts/BaseLayout.vue";
 import BackendMixin from "@/mixins/BackendMixin.js";
 
 import { signin } from "@/api/auth.js";
+import GoogleButton from '@/components/buttons/oauth/GoogleButton.vue';
+import GitHubButton from '@/components/buttons/oauth/GitHubButton.vue';
 
 export default {
 	name: "SignInView",
     mixins: [BackendMixin],
-	components: { Alert, BaseLayout },
+	components: { BaseLayout, Alert, GoogleButton, GitHubButton },
     data() {
         return {
             message: null,
@@ -148,7 +136,7 @@ main .form-control {
 }
 </style>
 
-<style scoped>
+<style>
 .btn.google,
 .btn.github {
 	opacity: 0.9;
