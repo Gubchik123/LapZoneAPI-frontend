@@ -25,11 +25,8 @@
 					<div class="d-flex mb-4">
 						<!-- TODO: 
                             Add "Like" button if user is authenticated
-                            Add checking if product is in cart
                         -->
-						<button class="cart btn btn-success ms-2">
-							<ion-icon v-pre name="cart-outline"></ion-icon>
-						</button>
+						<cart-button :product_id="product.id" />
 					</div>
 					<!-- Price and link to reviews -->
 					<div
@@ -179,6 +176,7 @@
 import BaseLayout from "@/layouts/BaseLayout.vue";
 import BackendMixin from "@/mixins/BackendMixin.js";
 
+import CartButton from "@/components/buttons/CartButton.vue";
 import ProductReviews from "@/components/shop/ProductReviews.vue";
 
 import { get_product_by_ } from "@/api/shop.js";
@@ -186,7 +184,7 @@ import { get_product_by_ } from "@/api/shop.js";
 export default {
 	name: "ProductDetailView",
 	mixins: [BackendMixin],
-	components: { BaseLayout, ProductReviews },
+	components: { BaseLayout, CartButton, ProductReviews },
 	data() {
 		return { product: null };
 	},
