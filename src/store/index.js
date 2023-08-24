@@ -5,6 +5,7 @@ import backend from "./backend";
 import error from "./error";
 import shop from "./shop";
 import cart from "./cart";
+import user from "./user";
 
 // Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ const store = new Vuex.Store({
 		error: error,
         shop: shop,
         cart: cart,
+        user: user,
 	},
 });
 
