@@ -29,9 +29,8 @@
 						>
 							Change username
 						</router-link>
-						<!-- TODO: router-link with :to="{ name: 'update-password' }" -->
-						<a
-							href="#"
+						<router-link
+							:to="{ name: 'update-password' }"
 							:class="{
 								'active disabled':
 									$route.name == 'update-password',
@@ -39,7 +38,7 @@
 							class="list-group-item list-group-item-action"
 						>
 							Change password
-						</a>
+						</router-link>
 						<!-- TODO: router-link with :to="{ name: 'wishes' }" -->
 						<a
 							href="#"
