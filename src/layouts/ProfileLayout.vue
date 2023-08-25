@@ -39,16 +39,15 @@
 						>
 							Change password
 						</router-link>
-						<!-- TODO: router-link with :to="{ name: 'wishes' }" -->
-						<a
-							href="#"
+						<router-link
+							:to="{ name: 'wishes' }"
 							:class="{
 								'active disabled': $route.name == 'wishes',
 							}"
 							class="list-group-item list-group-item-action content-between"
 						>
 							Wish list
-						</a>
+						</router-link>
 						<!-- TODO: router-link with :to="{ name: 'orders' }" -->
 						<a
 							href="#"
