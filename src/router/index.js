@@ -9,6 +9,7 @@ import EmailDeleteView from "@/views/mailing/EmailDeleteView.vue";
 
 import shop_routes from "./shop_routes.js";
 import auth_routes from "./auth_routes.js";
+import order_routes from "./order_routes.js";
 import profile_routes from "./profile_routes.js";
 
 const router = createRouter({
@@ -46,6 +47,13 @@ const router = createRouter({
         {
             path: "/profile",
             children: profile_routes,
+        },
+        // Order routes
+        {
+            path: "/order",
+            name: "order",
+            redirect: "/order/checkout",
+            children: order_routes,
         },
         // Cart route
         {
