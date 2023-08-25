@@ -1,37 +1,29 @@
 <template>
 	<ProfileLayout title="Wish list">
-		<div class="col-lg-9 col-md-12 px-0">
+		<div v-if="products.results && products.results.length != 0" class="row">
 			<div
-				v-if="products.results && products.results.length != 0"
-				id="content"
-				class="row panel-bg-color p-3 rounded"
+				:key="product.id"
+				v-for="product in products.results"
+				class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch"
 			>
 				<div
-					:key="product.id"
-					v-for="product in products.results"
-					class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch"
+					class="product w-100 d-flex flex-column justify-content-between rounded mb-3"
 				>
-					<div
-						class="product w-100 d-flex flex-column justify-content-between rounded mb-3"
-					>
-						<ProductCard :product="product" />
-					</div>
+					<ProductCard :product="product" />
 				</div>
-				<pagination-nav
-					v-if="products.count > 12"
-					@change_page="change_page"
-					:next="products.next"
-					:previous="products.previous"
-				/>
 			</div>
-
-			<div v-else>
-				<Alert
-					category="primary"
-					message="There are no liked products yet."
-				/>
-			</div>
+			<pagination-nav
+				v-if="products.count > 12"
+				@change_page="change_page"
+				:next="products.next"
+				:previous="products.previous"
+			/>
 		</div>
+		<Alert
+			v-else
+			category="primary"
+			message="There are no liked products yet."
+		/>
 	</ProfileLayout>
 </template>
 

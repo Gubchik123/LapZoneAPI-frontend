@@ -1,29 +1,25 @@
 <template>
 	<ProfileLayout title="Change password">
-		<div class="col-lg-9 col-md-12 px-0">
-			<div id="content" class="panel-bg-color p-3 rounded">
-				<form @submit.prevent="update">
-					<!-- Password field -->
-					<p>
-						<label for="password">New password:</label>
-						<input
-							v-model.lazy.trim="new_password"
-							@focus="confirmation = true"
-							required=""
-							id="password"
-							type="password"
-							class="form-control"
-							placeholder="Password"
-						/>
-					</p>
-					<ConfirmPasswordModal
-						v-show="confirmation"
-						@confirm="update"
-						:error_message="error_message"
-					/>
-				</form>
-			</div>
-		</div>
+		<form @submit.prevent="update">
+			<!-- Password field -->
+			<p>
+				<label for="password">New password:</label>
+				<input
+					v-model.lazy.trim="new_password"
+					@focus="confirmation = true"
+					required=""
+					id="password"
+					type="password"
+					class="form-control"
+					placeholder="Password"
+				/>
+			</p>
+			<ConfirmPasswordModal
+				v-show="confirmation"
+				@confirm="update"
+				:error_message="error_message"
+			/>
+		</form>
 	</ProfileLayout>
 </template>
 
@@ -43,10 +39,10 @@ export default {
 	},
 	methods: {
 		update(current_password) {
-            if (this.new_password == current_password) {
-                this.error_message = "New password must be different";
-                return;
-            }
+			if (this.new_password == current_password) {
+				this.error_message = "New password must be different";
+				return;
+			}
 
 			update_user_password(
 				this.new_password,

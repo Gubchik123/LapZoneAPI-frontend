@@ -60,7 +60,11 @@
 					</div>
 				</div>
 
-				<slot></slot>
+                <div class="col-lg-9 col-md-12 px-0">
+			        <div id="content" class="panel-bg-color p-3 rounded">
+				        <slot></slot>
+                    </div>
+                </div>
 			</div>
 
 			<slot name="adding_content"></slot>
