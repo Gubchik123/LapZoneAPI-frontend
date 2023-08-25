@@ -120,7 +120,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .white-space-nowrap {
 	white-space: nowrap;
 }
