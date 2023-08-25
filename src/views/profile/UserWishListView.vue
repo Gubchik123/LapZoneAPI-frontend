@@ -4,7 +4,7 @@
 			<div
 				v-if="products.results && products.results.length != 0"
 				id="content"
-				class="panel-bg-color p-3 rounded"
+				class="row panel-bg-color p-3 rounded"
 			>
 				<div
 					:key="product.id"
