@@ -23,9 +23,7 @@
 				>
 					<!-- "Like" and "Cart" buttons -->
 					<div class="d-flex mb-4">
-						<!-- TODO: 
-                            Add "Like" button if user is authenticated
-                        -->
+						<like-button :product_id="product.id" />
 						<cart-button :product_id="product.id" />
 					</div>
 					<!-- Price and link to reviews -->
@@ -176,6 +174,8 @@
 import BaseLayout from "@/layouts/BaseLayout.vue";
 import BackendMixin from "@/mixins/BackendMixin.js";
 
+import Carousel from "@/components/shop/Carousel.vue";
+import LikeButton from "@/components/buttons/LikeButton.vue";
 import CartButton from "@/components/buttons/CartButton.vue";
 import ProductReviews from "@/components/shop/ProductReviews.vue";
 
@@ -184,7 +184,13 @@ import { get_product_by_ } from "@/api/shop.js";
 export default {
 	name: "ProductDetailView",
 	mixins: [BackendMixin],
-	components: { BaseLayout, CartButton, ProductReviews },
+	components: {
+		BaseLayout,
+		Carousel,
+		LikeButton,
+		CartButton,
+		ProductReviews,
+	},
 	data() {
 		return { product: null };
 	},

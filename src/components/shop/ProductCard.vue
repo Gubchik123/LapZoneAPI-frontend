@@ -31,17 +31,18 @@
 	</div>
 	<!-- "Like" and "Add to cart" product buttons -->
 	<div class="product__buttons d-flex justify-content-between">
-		<!-- TODO: Add "Like" button if user is authenticated -->
+		<like-button :product_id="product.id" />
 		<cart-button :product_id="product.id" />
 	</div>
 </template>
 
 <script>
-import CartButton from "../buttons/CartButton.vue";
+import LikeButton from "@/components/buttons/LikeButton.vue";
+import CartButton from "@/components/buttons/CartButton.vue";
 
 export default {
 	name: "ProductCard",
-    components: { CartButton },
+    components: { LikeButton, CartButton },
 	props: {
 		product: {
 			type: Object,
