@@ -13,10 +13,12 @@
 							>
 								Continue shopping
 							</router-link>
-							<!-- TODO: router-link to checkout page -->
-							<a href="#" class="btn btn-lg btn-success mb-2">
+							<router-link
+								:to="{ name: 'checkout' }"
+								class="btn btn-lg btn-success mb-2"
+							>
 								Checkout
-							</a>
+							</router-link>
 						</div>
 					</div>
 				</div>
