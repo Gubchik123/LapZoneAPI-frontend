@@ -27,6 +27,27 @@ export function get_products(url) {
     }).then((response) => response.json());
 }
 
+export function add_like(product_id, server_url) {
+    return fetch(`${server_url}/shop/like/`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            ...get_json_headers(), ...get_auth_headers(),
+        },
+        body: JSON.stringify({product_id}),
+    }).then((response) => response.json());
+}
+ 
+export function delete_like(product_id, server_url) {
+    return fetch(`${server_url}/shop/like/${product_id}/`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+            ...get_json_headers(), ...get_auth_headers(),
+        },
+    })
+}
+
 export function create_review(new_review, server_url) {
     return fetch(`${server_url}/shop/review/`, {
         method: "POST",
