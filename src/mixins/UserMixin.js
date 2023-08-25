@@ -6,7 +6,7 @@ export default {
     },
     methods: {
         is_user_authenticated() {
-            return this.user === null;
+            return this.user !== null;
         },
         current_user_id() {
             return this.user_id;

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="is_user_authenticated" class="me-auto">
+    <div v-if="is_user_authenticated()" class="me-auto">
         <button
             v-if="is_liked"
             @click="unlike"
