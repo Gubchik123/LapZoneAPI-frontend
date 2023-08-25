@@ -48,16 +48,15 @@
 						>
 							Wish list
 						</router-link>
-						<!-- TODO: router-link with :to="{ name: 'orders' }" -->
-						<a
-							href="#"
+						<router-link
+							:to="{ name: 'orders' }"
 							:class="{
 								'active disabled': $route.name == 'orders',
 							}"
 							class="list-group-item list-group-item-action content-between"
 						>
 							Order list
-						</a>
+						</router-link>
 					</div>
 				</div>
 
