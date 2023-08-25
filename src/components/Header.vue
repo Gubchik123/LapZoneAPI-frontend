@@ -130,14 +130,17 @@ export default {
 	},
 	created() {
 		this.get_cart_products();
-		if (localStorage.getItem("token")) this.get_user();
+		if (localStorage.getItem("token")) {
+            this.get_user();
+            this.get_user_liked_product_ids();
+        };
 	},
 	computed: {
 		...mapGetters("cart", ["cart_quantity"]),
 	},
 	methods: {
 		...mapActions("cart", ["get_cart_products"]),
-		...mapActions("user", ["get_user"]),
+		...mapActions("user", ["get_user", "get_user_liked_product_ids"]),
 	},
 };
 </script>

@@ -12,6 +12,17 @@ export default {
 		UPDATE_USER_USERNAME(state, username) {
 			state.user.username = username;
 		},
+		UPDATE_USER_LIKED_PRODUCT_IDS(state, liked_product_ids) {
+			state.user.liked_product_ids = liked_product_ids;
+		},
+        ADD_LIKE(state, product_id) {
+            state.user.liked_product_ids.push(product_id);
+        },
+        DELETE_LIKE(state, product_id) {
+            state.user.liked_product_ids = state.user.liked_product_ids.filter(
+                (id) => id !== product_id
+            );
+        }
 	},
 	actions: {
 		get_user({ commit, getters }) {
@@ -27,6 +38,22 @@ export default {
 				}
 			});
 		},
+        get_user_liked_product_ids({ commit, getters }) {
+            fetch(
+				`${getters.server_url}/profile/wish/list/ids/`,
+				{
+					method: "GET",
+					credentials: "include",
+					headers: get_auth_headers(),
+				}
+			).then((response) => {
+				if (response.ok) {
+					response.json().then((data) => {
+						commit("UPDATE_USER_LIKED_PRODUCT_IDS", data);
+					});
+				}
+			});
+        },
 		update_user_email({ commit, getters }, email) {
 			fetch(`${getters.server_url}/auth/users/me/`, {
 				method: "PUT",
@@ -62,7 +89,7 @@ export default {
 				}),
 			}).then((response) => {
 				if (response.ok) commit("UPDATE_USER_USERNAME", username);
-				else return response.json()
+				else return response.json();
 			});
 		},
 	},

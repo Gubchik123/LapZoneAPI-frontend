@@ -86,13 +86,16 @@ export default {
 		title: { type: String, required: true },
 	},
 	created() {
-        if (this.user == null) this.get_user();
+        if (this.user == null) {
+            this.get_user();
+            this.get_user_liked_product_ids();
+        }
 	},
 	computed: {
 		...mapGetters("user", ["user"]),
 	},
 	methods: {
-		...mapActions("user", ["get_user"]),
+		...mapActions("user", ["get_user", "get_user_liked_product_ids"]),
 		sign_out() {
 			signout(this.server_url).then((response) => {
 				localStorage.removeItem("token");
