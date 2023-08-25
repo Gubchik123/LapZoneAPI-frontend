@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapMutations, mapActions, mapGetters } from "vuex";
 
 import BaseLayout from "@/layouts/BaseLayout.vue";
 import BackendMixin from "@/mixins/BackendMixin.js";
@@ -94,9 +94,11 @@ export default {
 		...mapGetters("user", ["user"]),
 	},
 	methods: {
+        ...mapMutations("user", ["UPDATE_USER"]),
 		...mapActions("user", ["get_user", "get_user_liked_product_ids"]),
 		sign_out() {
 			signout(this.server_url).then((response) => {
+                this.UPDATE_USER(null);
 				localStorage.removeItem("token");
 				this.$router.push({ name: "home" });
 			});
