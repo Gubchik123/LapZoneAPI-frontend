@@ -25,3 +25,29 @@ export function auth_checkout(order, server_url) {
         else throw Error();
     })
 }
+
+export function get_orders(server_url, params) {
+    return fetch(`${server_url}/order/list/${params}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            ...get_json_headers(), ...get_auth_headers()
+        }
+    }).then(response => {
+        if (response.ok) return response.json();
+        else throw Error();
+    })
+}
+
+export function remove_order_with_(id, server_url) {
+    return fetch(`${server_url}/order/${id}/`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+            ...get_json_headers(), ...get_auth_headers()
+        }
+    }).then(response => {
+        if (response.ok) return "OK";
+        else throw Error();
+    })
+}
