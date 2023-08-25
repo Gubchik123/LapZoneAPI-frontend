@@ -39,6 +39,19 @@ export function get_orders(server_url, params) {
     })
 }
 
+export function get_order_with_(id, server_url) {
+    return fetch(`${server_url}/order/${id}/`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            ...get_json_headers(), ...get_auth_headers()
+        }
+    }).then(response => {
+        if (response.ok) return response.json();
+        else throw Error();
+    })
+}
+
 export function remove_order_with_(id, server_url) {
     return fetch(`${server_url}/order/${id}/`, {
         method: "DELETE",
