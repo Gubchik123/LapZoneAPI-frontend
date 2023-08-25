@@ -5,7 +5,11 @@
         message="There are no products in your cart yet"
     />
 	<div v-else>
-        <items-table :collection="cart_products" />
+        <items-table 
+            @update="update"
+            @delete="delete_cart_product"
+            :collection="cart_products" 
+        />
 
         <div class="d-flex justify-content-between fs-4 mt-3">
             <b>Total price: </b>

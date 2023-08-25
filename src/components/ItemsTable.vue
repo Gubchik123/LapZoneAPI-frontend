@@ -53,7 +53,7 @@
 					<td>
 						<input
                             v-if="is_changeable"
-							@blur="update(item.product.id, item.quantity)"
+							@blur="$emit('update', item.product.id, item.quantity)"
 							v-model.lazy="item.quantity"
 							min="1"
 							max="10"
@@ -69,7 +69,7 @@
 					<!-- "Remove" button -->
 					<td v-if="is_changeable">
 						<button
-							@click="delete_cart_product(item.product.id)"
+							@click="$emit('delete', item.product.id)"
 							title="Remove"
 							class="remove btn fs-6 border-0 panel-bg-color"
 						>
