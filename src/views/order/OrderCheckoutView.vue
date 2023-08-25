@@ -185,11 +185,7 @@ export default {
 				auth_checkout(this.order, this.server_url).then((response) => {
 					this._update_cart_products();
 
-					this.$router.push({
-						name: "profile",
-					});
-					// TODO: redirect to order detail page
-					// this.$router.push({ name: 'order', params: { uuid: response.id } });
+					this.$router.push(`/order/${response.id}`)
 				});
 			else
 				checkout(

@@ -21,10 +21,12 @@
 						>
 							<!-- Order ID -->
 							<td class="me-2">
-								<!-- TODO: router-link to order detail page -->
-								<a href="#" class="fs-5 white-space-normal">
+								<router-link
+									:to="`/order/${order.id}`"
+									class="fs-5 white-space-normal"
+								>
 									{{ order.id }}
-								</a>
+								</router-link>
 							</td>
 							<!-- Order total price -->
 							<td class="fs-4 me-2">{{ order.total_price }}$</td>
