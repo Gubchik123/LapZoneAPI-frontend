@@ -20,6 +20,8 @@ export function get_product_by_(slug, server_url) {
 }
 
 export function get_products(url) {
+    if (!url.includes("wish"))
+        return fetch(url).then((response) => response.json());
 	return fetch(url, {
         method: "GET",
         credentials: "include",
