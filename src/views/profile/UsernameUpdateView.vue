@@ -1,5 +1,5 @@
 <template>
-	<ProfileLayout title="Customer profile">
+	<ProfileLayout title="Change username">
 		<div class="col-lg-9 col-md-12 px-0">
 			<div id="content" class="panel-bg-color p-3 rounded">
 				<form @submit.prevent="update">
