@@ -1,4 +1,4 @@
-import { get_json_headers } from "./api";
+import { get_auth_headers, get_json_headers } from "./api";
 
 export function get_carousel_images(server_url) {
 	return fetch(`${server_url}/shop/carousel-images/`).then((response) =>
@@ -20,7 +20,11 @@ export function get_product_by_(slug, server_url) {
 }
 
 export function get_products(url) {
-	return fetch(url).then((response) => response.json());
+	return fetch(url, {
+        method: "GET",
+        credentials: "include",
+        headers: get_auth_headers(),
+    }).then((response) => response.json());
 }
 
 export function create_review(new_review, server_url) {
