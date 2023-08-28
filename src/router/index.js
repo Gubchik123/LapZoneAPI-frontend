@@ -7,10 +7,10 @@ import ErrorView from "@/views/ErrorView.vue";
 import CartDetailView from "@/views/cart/CartDetailView.vue";
 import EmailDeleteView from "@/views/mailing/EmailDeleteView.vue";
 
-import shop_routes from "./shop_routes.js";
-import auth_routes from "./auth_routes.js";
-import order_routes from "./order_routes.js";
-import profile_routes from "./profile_routes.js";
+import shop_routes from "./routes/shop.js";
+import auth_routes from "./routes/auth.js";
+import order_routes from "./routes/order.js";
+import profile_routes from "./routes/profile.js";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
