@@ -1,11 +1,11 @@
 import Vuex from "vuex";
 // import Vue from "vue";
 
-import backend from "./backend";
-import error from "./error";
-import shop from "./shop";
-import cart from "./cart";
-import user from "./user";
+import backend from "./modules/backend";
+import error from "./modules/error";
+import shop from "./modules/shop";
+import cart from "./modules/cart";
+import user from "./modules/user";
 
 // Vue.use(Vuex);
 
